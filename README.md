@@ -74,4 +74,4 @@ Get a single agency
 ```
 Use the graphIQL schema to explore more querying/mutation options.
 ## Environment
-- Node + Mongo + Express + Socket.io + GraphQL
+- Node + Mongo + Express + GraphQL

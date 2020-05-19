@@ -97,6 +97,9 @@ const InputClientType = new GraphQLInputObjectType({
   })
 });
 
+/**
+ * Used for querying mongo collections
+ */
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -156,6 +159,9 @@ const RootQuery = new GraphQLObjectType({
   }
 });
 
+/**
+ * Used for mutating mongo collections
+ */
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {

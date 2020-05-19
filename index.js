@@ -1,10 +1,12 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
+const { express: voyagerMiddleware } = require('graphql-voyager/middleware');
 const schema = require('./schema/RootSchema');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require("body-parser");
 const jwt = require('express-jwt');
+const path = require("path");
 
 const app = express();
 
@@ -32,7 +34,9 @@ mongoose
   })
   .catch(err => console.log(err));
 
-  mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', false);
+
+app.use('/voyager', voyagerMiddleware({ endpointUrl: '/api/graphql' }));
 
 // Base api for all our graphql calls.
 app.use('/api/graphql', authMiddleware, graphqlHTTP(req => ({
@@ -43,7 +47,7 @@ app.use('/api/graphql', authMiddleware, graphqlHTTP(req => ({
   graphiql: true,
 })));
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "index.html")))
 
 const PORT = process.env.PORT || 5000;
 
